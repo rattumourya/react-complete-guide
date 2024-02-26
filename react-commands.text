@@ -1,5 +1,9 @@
 resource link : https://create-react-app.dev/docs/getting-started/
 
+
+npm create-react-app my-app
+    create react app
+    
 npm start
     Starts the development server.
 
@@ -8,6 +12,8 @@ npm run build
 
 npm test
     Starts the test runner.
+
+
 
 npm run eject
     Removes this tool and copies build dependencies, configuration files
