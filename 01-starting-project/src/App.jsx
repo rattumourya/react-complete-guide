@@ -6,12 +6,25 @@ import { useState } from 'react';
 
 function App() {
   console.log("calling app");
-  var [selectedTopic,setSelectedTopic] = useState('components');
+  var [selectedTopic,setSelectedTopic] = useState();
 
   function handleSelect(selectedButton) {
     setSelectedTopic(selectedButton)
     console.log(selectedTopic);
   }
+
+  let tableContent = <p>Please select a topic.</p>;
+  if(selectedTopic)
+  {
+    tableContent = (<div id="tab-content">
+                    <h3>{EXAMPLES[selectedTopic].title}</h3>
+                    <p>{EXAMPLES[selectedTopic].description}</p>
+                    <pre>
+                        <code>{EXAMPLES[selectedTopic].code}</code>
+                    </pre>
+                  </div>);
+  }
+
 
   return (
     <div>
@@ -40,13 +53,7 @@ function App() {
             <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
             <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-               <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>
+          {tableContent}
         </section>
       </main>
     </div>
