@@ -27,7 +27,7 @@ function App() {
 
 
   return (
-    <Fragment>
+    <>
       <Header/>
       <main>
         <section id='core-concepts'>
@@ -49,7 +49,7 @@ function App() {
           {tableContent}
         </section>
       </main>
-    </Fragment>
+    </>
   );
 }
 
