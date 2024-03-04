@@ -2,7 +2,7 @@ import { CORE_CONCEPTS , EXAMPLES } from './data.js';
 import Header from "./components/Header/Header.jsx"
 import CoreConcepts from './components/CoreConcepts.jsx';
 import TabButton from './components/TabButton.jsx';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 function App() {
   console.log("calling app");
@@ -27,7 +27,7 @@ function App() {
 
 
   return (
-    <div>
+    <Fragment>
       <Header/>
       <main>
         <section id='core-concepts'>
@@ -49,7 +49,7 @@ function App() {
           {tableContent}
         </section>
       </main>
-    </div>
+    </Fragment>
   );
 }
 
