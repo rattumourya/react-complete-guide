@@ -14,7 +14,8 @@ export default function Player({name,symbol}) {
 
     function editNameButtonHandler()
     {
-        setIsEditing(!isEditing);
+        setIsEditing((editing) => !editing); // => schedules a state update to true
+
     }
     return (
         <li>
