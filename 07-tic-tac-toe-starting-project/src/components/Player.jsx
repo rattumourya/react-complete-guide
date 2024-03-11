@@ -9,7 +9,7 @@ export default function Player({name,symbol}) {
     if(isEditing)
     {
          buttonName = "Save";
-         playerField = <input type="text" value={name}  required/>
+         playerField = <input type="text" defaultValue ={name}  required/>
     }
 
     function editNameButtonHandler()
