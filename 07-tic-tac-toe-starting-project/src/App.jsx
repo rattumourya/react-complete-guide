@@ -5,10 +5,15 @@ import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./winning-combinations";
 import GameOver from "./components/GameOver";
 
-const initialGameBoard = [
+const INITIAL_GAME_BOARD = [
   [null,null,null],
   [null,null,null],
   [null,null,null]];
+
+const PLAERYS = {
+    'X': 'Player 1',
+    'O': 'Player 2'
+  };
 
 function deriveActivePlayer(gameTurns){
   let currentPlayer = 'X';
@@ -21,36 +26,9 @@ function deriveActivePlayer(gameTurns){
   return currentPlayer;
 }
 
-function App() {
-  // const [activePlayer,setActivePlayer] = useState('X');
-  const [gameTurns, setGameTurns] = useState([]);
-  const activePlayer = deriveActivePlayer(gameTurns);
-  const [players,setPlayers] = useState({
-    'X': 'Player 1',
-    'O': 'Player 2'
-  })
-
-  function handlePlayerNameChange(symbol,player)
-  {
-    setPlayers((prevPlayer) => {
-      return {
-        ...prevPlayer,
-        [symbol]:player
-      }
-    });
-  }
-
-  let gameBoard = [...initialGameBoard.map(innerArr => [...innerArr])];
-
-  for(const turn of gameTurns)
-  {
-      const {square,player} = turn;
-      const {row , col} = square;
-      gameBoard[row][col] = player;
-  }
-
-  let winner = null;
-
+function deriveWinner(gameBoard,players)
+{
+  let winner;
   for(const combination of WINNING_COMBINATIONS)
   {
     const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column]
@@ -63,6 +41,44 @@ function App() {
     }
 
   }
+
+  return winner;
+}
+
+function deriveGameBoard(gameTurns)
+{
+  
+  let gameBoard = [...INITIAL_GAME_BOARD.map(innerArr => [...innerArr])];
+
+  for(const turn of gameTurns)
+  {
+      const {square,player} = turn;
+      const {row , col} = square;
+      gameBoard[row][col] = player;
+  }
+
+  return gameBoard;
+}
+
+function App() {
+  // const [activePlayer,setActivePlayer] = useState('X');
+  const [gameTurns, setGameTurns] = useState([]);
+  const activePlayer = deriveActivePlayer(gameTurns);
+  const [players,setPlayers] = useState(PLAERYS)
+
+  function handlePlayerNameChange(symbol,player)
+  {
+    setPlayers((prevPlayer) => {
+      return {
+        ...prevPlayer,
+        [symbol]:player
+      }
+    });
+  }
+
+  let gameBoard = deriveGameBoard(gameTurns);
+
+  let winner = deriveWinner(gameBoard,players);
 
   const hasDraw = (gameTurns.length === 9 && !winner);
   
