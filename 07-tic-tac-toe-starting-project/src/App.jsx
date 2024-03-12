@@ -25,6 +25,20 @@ function App() {
   // const [activePlayer,setActivePlayer] = useState('X');
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
+  const [players,setPlayers] = useState({
+    'X': 'Player 1',
+    'O': 'Player 2'
+  })
+
+  function handlePlayerNameChange(symbol,player)
+  {
+    setPlayers((prevPlayer) => {
+      return {
+        ...prevPlayer,
+        [symbol]:player
+      }
+    });
+  }
 
   let gameBoard = [...initialGameBoard.map(innerArr => [...innerArr])];
 
@@ -45,7 +59,7 @@ function App() {
 
     if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol == thirdSquareSymbol)
     {
-      winner = firstSquareSymbol;
+      winner = players[firstSquareSymbol];
     }
 
   }
@@ -76,8 +90,8 @@ function App() {
       <main>
         <div id="game-container">
           <ol id="players" className="highlight-player">
-             <Player initialName="Player 1" symbol="X" isActive={activePlayer === 'X'} />
-             <Player initialName="Player 2" symbol="O"  isActive={activePlayer === 'O'}/>
+             <Player initialName="Player 1" symbol="X" onChangePlayerName={handlePlayerNameChange} isActive={activePlayer === 'X'} />
+             <Player initialName="Player 2" symbol="O" onChangePlayerName={handlePlayerNameChange} isActive={activePlayer === 'O'}/>
           </ol>
           {(winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart}/>}
           <Gameboard board={gameBoard}  onSelectSquare={handleSelectSquare}/>
