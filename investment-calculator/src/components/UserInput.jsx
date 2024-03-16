@@ -1,24 +1,28 @@
 
 function UserInput() {
     return (
-        <div id="user-input">
+        <section id="user-input">
             <div className="input-group">
-                <label htmlFor="">INITIAL INVESMENT</label>
-                <input id="" type="number" />
-            </div>
-            <div className="input-group" >
-                <label htmlFor="">INITIAL INVESMENT</label>
-                <input id="" type="number" />
+                <p>
+                    <label htmlFor="">Initial Invesment</label>
+                    <input type="number" required/>
+                </p>
+                <p>
+                    <label htmlFor="">Annual Investment</label>
+                    <input type="number" required/>
+                </p>
             </div>
             <div className="input-group">
-                <label htmlFor="">INITIAL INVESMENT</label>
-                <input id="" type="text" />
+                <p>
+                    <label htmlFor="">Expected return</label>
+                    <input type="number" required/>
+                </p>
+                <p>
+                    <label htmlFor="">Duration</label>
+                    <input type="number" required/>
+                </p>
             </div>
-            <div className="input-group" >
-                <label htmlFor="">INITIAL INVESMENT</label>
-                <input id="" type="text" />
-            </div>
-        </div>
+        </section>
     )
 }
 
