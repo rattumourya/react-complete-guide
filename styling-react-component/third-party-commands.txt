@@ -1,1 +1,4 @@
 npm install styled-components
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
