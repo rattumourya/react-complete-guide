@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { styled } from 'styled-components';
 import Button from './Button';
-import CustomInput from './Input.jsx';
+import Input from './Input.jsx';
 
 const ControllComponents = styled.div`
   display: flex;
@@ -33,13 +33,13 @@ export default function AuthInputs() {
   return (
     <div id="auth-inputs">
       <ControllComponents>
-          <CustomInput
+          <Input
             type="email"
             label="Email"
             invalid={emailNotValid}
             onChange={(event) => handleInputChange('email', event.target.value)}
           />
-          <CustomInput
+          <Input  
             type="password"
             label="Password"
             invalid={passwordNotValid}
