@@ -7,6 +7,7 @@ export default function Player() {
 
   function onSubmit(){
     setPlayerName(currentPlayerName.current.value);
+    currentPlayerName.current.value = "";
   }
 
 
