@@ -1,3 +1,5 @@
+import DueDatePicker from "./DueDatePicker"
+
 export default function AddProjectDetails() {
     return (
         <section className="pt-16 pr-32">
@@ -13,7 +15,9 @@ export default function AddProjectDetails() {
                 <input type="description" id="description" name="description" className="w-full p-1" />
                 <br /><br />
                 <label htmlFor="due-date" className="uppercase text-sm">Due Date</label>
-                <input type="due-date" id="due-date" name="due-date" className="w-full p-1" />
+                <span className="w-full">
+                    <DueDatePicker />
+                </span>
 
             </form>
         </section>
