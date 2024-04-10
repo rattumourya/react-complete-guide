@@ -12,7 +12,7 @@ export default function NewProject({onAdd}) {
         const enteredDueDate = dueDate.current.value;
 
         // add project
-        onAdd({enteredTitle,enteredDescription,enteredDueDate});
+        onAdd({title:enteredTitle,description:enteredDescription,dueDate:enteredDueDate});
     }
 
     return  <div className="w-[35rem] mt-16">
