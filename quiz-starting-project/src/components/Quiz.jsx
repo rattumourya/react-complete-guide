@@ -1,6 +1,7 @@
 import QUESTIONS from '../question.js';
 import { useState } from 'react';
 import quizComplete from '../assets/quiz-complete.png';
+import QuestionTimeout from './QuestionTimeout.jsx';
 
 export default function Quiz() {
 
@@ -30,6 +31,10 @@ export default function Quiz() {
     return (
        <div id='quiz'>
           <div id='questions'>
+            <QuestionTimeout 
+                timeout={30000}
+                onTimeout={() => handleSelectAnswer(null)}    
+            />
             <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
             <ul id='answers'>
                 {QUESTIONS[activeQuestionIndex].answers.map((answer) => (
