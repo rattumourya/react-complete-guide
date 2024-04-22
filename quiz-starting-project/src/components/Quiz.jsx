@@ -1,5 +1,5 @@
 import QUESTIONS from '../question.js';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import quizComplete from '../assets/quiz-complete.png';
 import QuestionTimeout from './QuestionTimeout.jsx';
 
@@ -22,18 +22,22 @@ export default function Quiz() {
     const suffledQuestions = [...QUESTIONS[activeQuestionIndex].answers];
     suffledQuestions.sort((q1,q2) =>  Math.random() - 0.5);
 
-    function handleSelectAnswer(selectedAnswer) {
+    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
         setSelectedAnswers((prevSelectedAnswers) => {
             return [...prevSelectedAnswers, selectedAnswer];
         })
-    }
+    },[])
+
+    const skipNextAnswer = useCallback(() => handleSelectAnswer(null),[handleSelectAnswer]);
+    
 
     return (
        <div id='quiz'>
           <div id='questions'>
             <QuestionTimeout 
-                timeout={30000}
-                onTimeout={() => handleSelectAnswer(null)}    
+                key={activeQuestionIndex}
+                timeout={10000}
+                onTimeout={skipNextAnswer}    
             />
             <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
             <ul id='answers'>
