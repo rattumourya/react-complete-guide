@@ -5,9 +5,17 @@ import QuestionTimeout from './QuestionTimeout.jsx';
 
 export default function Quiz() {
 
-    const [selectedAnswer, setSelectedAnswers] = useState([]);
-    const activeQuestionIndex = selectedAnswer.length;
+    const [userAnswers, setSelectedAnswers] = useState([]);
+    const activeQuestionIndex = userAnswers.length;
     const isQuizCompleted = activeQuestionIndex === QUESTIONS.length;
+
+    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
+        setSelectedAnswers((prevSelectedAnswers) => {
+            return [...prevSelectedAnswers, selectedAnswer];
+        })
+    },[])
+
+    const skipNextAnswer = useCallback(() => handleSelectAnswer(null),[handleSelectAnswer]);
 
     if(isQuizCompleted) {
         return (
@@ -19,21 +27,13 @@ export default function Quiz() {
     }
 
 
-    const suffledQuestions = [...QUESTIONS[activeQuestionIndex].answers];
-    suffledQuestions.sort((q1,q2) =>  Math.random() - 0.5);
-
-    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
-        setSelectedAnswers((prevSelectedAnswers) => {
-            return [...prevSelectedAnswers, selectedAnswer];
-        })
-    },[])
-
-    const skipNextAnswer = useCallback(() => handleSelectAnswer(null),[handleSelectAnswer]);
+    const suffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
+    suffledAnswers.sort((q1,q2) =>  Math.random() - 0.5);
     
 
     return (
        <div id='quiz'>
-          <div id='questions'>
+          <div id='question'>
             <QuestionTimeout 
                 key={activeQuestionIndex}
                 timeout={10000}
@@ -41,9 +41,9 @@ export default function Quiz() {
             />
             <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
             <ul id='answers'>
-                {QUESTIONS[activeQuestionIndex].answers.map((answer) => (
+                {suffledAnswers.map((answer) => (
                     <li key={answer} className='answer'>
-                        <button onClick={handleSelectAnswer}>
+                        <button onClick={() => handleSelectAnswer(answer)}>
                             {answer}
                         </button>
                     </li>

@@ -11,7 +11,7 @@ export default function QuestionTimeout({timeout , onTimeout}) {
         return () => {
             clearTimeout(timer);
         }
-    },[onTimeout,timeout]);
+    },[onTimeout,timeout]);    // props and states can be added as dependencies
 
     useEffect(() => {
         const interval = setInterval(() => {
